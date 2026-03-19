@@ -21,8 +21,9 @@ Em caso de dúvida sobre uma decisão técnica, consulte este documento antes de
 11. [Git e commits](#11-git-e-commits)
 12. [Roadmap de desenvolvimento](#12-roadmap-de-desenvolvimento)
 13. [Gerenciamento de dependências e conflitos](#13-gerenciamento-de-dependências-e-conflitos)
-14. [O que o agente NÃO deve fazer](#14-o-que-o-agente-não-deve-fazer)
-15. [Como pedir ajuda ao agente](#15-como-pedir-ajuda-ao-agente)
+14. [Ambiente de desenvolvimento (Docker)](#14-ambiente-de-desenvolvimento-docker)
+15. [O que o agente NÃO deve fazer](#15-o-que-o-agente-não-deve-fazer)
+16. [Como pedir ajuda ao agente](#16-como-pedir-ajuda-ao-agente)
 
 ---
 
@@ -41,20 +42,21 @@ O objetivo principal é disponibilizar conteúdos de aula de forma organizada e 
 
 Não sugira tecnologias fora desta lista sem justificativa explícita e aprovação do desenvolvedor.
 
-| Camada                    | Tecnologia                           | Versão exata |
-| ------------------------- | ------------------------------------ | ------------ |
-| Runtime                   | Node.js                              | 20 LTS       |
-| Framework                 | Next.js (App Router)                 | 14.2.x       |
-| Linguagem                 | TypeScript                           | 5.x          |
-| Estilo                    | Tailwind CSS                         | 3.4.x        |
-| Banco de dados            | PostgreSQL via Neon (serverless)     | —            |
-| ORM                       | Prisma                               | 5.x          |
-| Autenticação              | NextAuth.js                          | 4.x          |
-| Deploy                    | Vercel                               | —            |
-| Armazenamento de arquivos | Google Drive (links externos) no MVP | —            |
-| Testes                    | Jest                                 | 29.x         |
-| Testes                    | @testing-library/react               | 14.x         |
-| Controle de versão        | Git + GitHub                         | —            |
+| Camada                           | Tecnologia                           | Versão exata |
+| -------------------------------- | ------------------------------------ | ------------ |
+| Runtime                          | Node.js                              | 20 LTS       |
+| Framework                        | Next.js (App Router)                 | 14.2.35      |
+| Linguagem                        | TypeScript                           | 5.x          |
+| Estilo                           | Tailwind CSS                         | 3.4.x        |
+| Banco de dados (produção)        | PostgreSQL via Neon (serverless)     | —            |
+| Banco de dados (desenvolvimento) | PostgreSQL via Docker                | 16-alpine    |
+| ORM                              | Prisma                               | 5.x          |
+| Autenticação                     | NextAuth.js                          | 4.x          |
+| Deploy                           | Vercel                               | —            |
+| Armazenamento de arquivos        | Google Drive (links externos) no MVP | —            |
+| Testes                           | Jest                                 | 29.x         |
+| Testes                           | @testing-library/react               | 14.x         |
+| Controle de versão               | Git + GitHub                         | —            |
 
 ### Decisões técnicas já tomadas (não reabrir)
 
@@ -62,6 +64,7 @@ Não sugira tecnologias fora desta lista sem justificativa explícita e aprovaç
 - **Sem autenticação de alunos no MVP:** alunos acessam tudo publicamente. Login existe apenas para o professor (painel admin).
 - **App Router do Next.js:** não usar Pages Router. Todo roteamento segue a convenção `src/app/`.
 - **Tailwind para estilo:** não criar arquivos CSS separados. Não usar CSS-in-JS (styled-components, emotion, etc.).
+- **Docker para desenvolvimento local:** Next.js + Postgres rodam em containers. Em produção, o banco é o Neon.
 
 ---
 
@@ -144,42 +147,42 @@ model Arquivo {
 Siga esta estrutura exatamente. Não crie pastas fora deste padrão.
 
 ```
-quimica-site/
+projeto-aulas/
 ├── prisma/
 │   ├── schema.prisma
 │   ├── seed.ts
 │   └── migrations/
 ├── public/
-│   └── images/           ← imagens estáticas do site (logo, favicon)
+│   └── images/               ← imagens estáticas do site (logo, favicon)
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx            ← layout raiz (header, footer, fonte)
-│   │   ├── page.tsx              ← página inicial
+│   │   ├── layout.tsx                ← layout raiz (header, footer, fonte)
+│   │   ├── page.tsx                  ← página inicial
 │   │   ├── assuntos/
-│   │   │   ├── page.tsx          ← listagem de assuntos
+│   │   │   ├── page.tsx              ← listagem de assuntos
 │   │   │   └── [slug]/
-│   │   │       ├── page.tsx      ← página do assunto com suas aulas
+│   │   │       ├── page.tsx          ← página do assunto com suas aulas
 │   │   │       └── [aulaSlug]/
-│   │   │           └── page.tsx  ← página individual da aula
+│   │   │           └── page.tsx      ← página individual da aula
 │   │   ├── admin/
-│   │   │   ├── layout.tsx        ← layout protegido (verifica sessão)
-│   │   │   ├── page.tsx          ← dashboard admin
+│   │   │   ├── layout.tsx            ← layout protegido (verifica sessão)
+│   │   │   ├── page.tsx              ← dashboard admin
 │   │   │   ├── aulas/
-│   │   │   │   ├── page.tsx      ← listagem de aulas no admin
+│   │   │   │   ├── page.tsx          ← listagem de aulas no admin
 │   │   │   │   ├── nova/
-│   │   │   │   │   └── page.tsx  ← formulário de criação
+│   │   │   │   │   └── page.tsx      ← formulário de criação
 │   │   │   │   └── [id]/
-│   │   │   │       └── page.tsx  ← formulário de edição
+│   │   │   │       └── page.tsx      ← formulário de edição
 │   │   │   └── assuntos/
-│   │   │       └── page.tsx      ← gerenciar assuntos
+│   │   │       └── page.tsx          ← gerenciar assuntos
 │   │   └── api/
 │   │       ├── auth/
 │   │       │   └── [...nextauth]/
-│   │       │       └── route.ts  ← NextAuth handler
+│   │       │       └── route.ts      ← NextAuth handler
 │   │       ├── aulas/
-│   │       │   └── route.ts      ← GET (público), POST (admin)
+│   │       │   └── route.ts          ← GET (público), POST (admin)
 │   │       └── assuntos/
-│   │           └── route.ts      ← GET (público), POST (admin)
+│   │           └── route.ts          ← GET (público), POST (admin)
 │   ├── components/
 │   │   ├── layout/
 │   │   │   ├── Header.tsx
@@ -191,18 +194,24 @@ quimica-site/
 │   │       ├── Button.tsx
 │   │       └── Badge.tsx
 │   ├── lib/
-│   │   ├── prisma.ts      ← instância global do PrismaClient
-│   │   └── auth.ts        ← configuração do NextAuth
+│   │   ├── prisma.ts         ← instância global do PrismaClient
+│   │   └── auth.ts           ← configuração do NextAuth
 │   └── types/
-│       └── index.ts       ← tipos TypeScript compartilhados
+│       └── index.ts          ← tipos TypeScript compartilhados
 ├── tests/
 │   ├── components/
-│   └── api/
-├── .env.local             ← NUNCA commitar
-├── .env.example           ← commitar (sem valores reais)
+│   ├── api/
+│   └── lib/
+├── Dockerfile                ← container do Next.js
+├── docker-compose.yml        ← orquestra Next.js + Postgres
+├── .dockerignore
+├── .env.local                ← NUNCA commitar
+├── .env.example              ← commitar (sem valores reais)
+├── .nvmrc                    ← versão do Node.js fixada
 ├── .gitignore
 ├── README.md
-└── AGENTS.md              ← este arquivo
+├── TASKS.md
+└── AGENTS.md                 ← este arquivo
 ```
 
 ---
@@ -214,7 +223,10 @@ quimica-site/
 ```bash
 # .env.example
 
-# Banco de dados (Neon)
+# Banco de dados
+# Desenvolvimento local (Docker):
+# DATABASE_URL="postgresql://postgres:postgres@localhost:5432/quimica_dev"
+# Produção (Neon):
 DATABASE_URL=""
 
 # NextAuth
@@ -339,8 +351,8 @@ A ordem de trabalho é sempre: **teste → código → refatoração** (Red → 
 ### O ciclo obrigatório
 
 ```
-1. RED    — escreva o teste. Rode. Ele deve falhar (o código não existe ainda).
-2. GREEN  — escreva o mínimo de código para o teste passar.
+1. RED      — escreva o teste. Rode. Ele deve falhar (o código não existe ainda).
+2. GREEN    — escreva o mínimo de código para o teste passar.
 3. REFACTOR — melhore o código sem quebrar o teste.
 ```
 
@@ -373,8 +385,8 @@ Componentes puramente visuais com pouca ou nenhuma lógica:
 - `jest` — runner de testes
 - `@testing-library/react` — testes de componentes
 - `@testing-library/jest-dom` — matchers extras (`toBeInTheDocument`, etc.)
-- Rodar todos os testes: `npm test`
-- Rodar em modo watch (desenvolvimento): `npm test -- --watch`
+- Rodar todos os testes: `docker compose exec app npm test`
+- Rodar em modo watch: `docker compose exec app npm test -- --watch`
 
 ### Estrutura dos testes
 
@@ -383,10 +395,10 @@ Testes ficam em `tests/` espelhando a estrutura de `src/`:
 ```
 tests/
 ├── api/
-│   ├── aulas.test.ts       ← testa src/app/api/aulas/route.ts
+│   ├── aulas.test.ts         ← testa src/app/api/aulas/route.ts
 │   └── assuntos.test.ts
 ├── lib/
-│   └── queries.test.ts     ← testa funções de src/lib/
+│   └── queries.test.ts       ← testa funções de src/lib/
 └── components/
     ├── AulaCard.test.tsx
     └── ArquivoLink.test.tsx
@@ -402,14 +414,11 @@ tests/
 
 describe("GET /api/aulas", () => {
   test("retorna apenas aulas publicadas", async () => {
-    // Arrange: mock do Prisma retornando aulas mistas
     prismaMock.aula.findMany.mockResolvedValue([aulaPublicadaFake]);
 
-    // Act
     const response = await GET();
     const data = await response.json();
 
-    // Assert
     expect(response.status).toBe(200);
     expect(data).toHaveLength(1);
     expect(data[0].publicada).toBe(true);
@@ -428,8 +437,6 @@ describe("GET /api/aulas", () => {
 
 ```typescript
 // tests/components/AulaCard.test.tsx
-// Escrito após o componente existir — verifica renderização básica
-
 test("exibe título e descrição da aula", () => {
   render(<AulaCard aula={aulaFake} />)
   expect(screen.getByText("Ligações Iônicas")).toBeInTheDocument()
@@ -475,7 +482,8 @@ refactor: extrai lógica de busca para lib/queries.ts
 ### MVP (fase atual)
 
 - [ ] Setup do projeto (Next.js, TypeScript, Tailwind)
-- [ ] Configuração do Prisma + Neon
+- [ ] Configurar Docker (Dockerfile + docker-compose.yml)
+- [ ] Configuração do Prisma + banco local (Docker)
 - [ ] Schema e primeira migration
 - [ ] Seed com dados de exemplo
 - [ ] Página inicial
@@ -483,7 +491,7 @@ refactor: extrai lógica de busca para lib/queries.ts
 - [ ] Página do assunto com aulas (`/assuntos/[slug]`)
 - [ ] Página individual da aula (`/assuntos/[slug]/[aulaSlug]`)
 - [ ] Header e Footer
-- [ ] Deploy na Vercel funcionando
+- [ ] Deploy na Vercel com Neon funcionando
 - [ ] Testes básicos de componentes
 
 ### Fase 2 — Painel admin
@@ -510,7 +518,7 @@ refactor: extrai lógica de busca para lib/queries.ts
 ### Semver — o que significam os números de versão
 
 ```
-next  14.2.5
+next  14.2.35
        │ │ └─ PATCH — correção de bug, seguro atualizar
        │ └─── MINOR — funcionalidade nova, geralmente seguro
        └───── MAJOR — pode quebrar o código existente
@@ -520,7 +528,7 @@ next  14.2.5
 
 ```bash
 # Correto — salva a versão exata no package.json
-npm install next@14.2.5 --save-exact
+npm install next@14.2.35 --save-exact
 
 # Ou configurar o npm para sempre salvar exato (fazer uma vez)
 npm config set save-exact true
@@ -536,28 +544,23 @@ Nunca instalar sem especificar versão (`npm install next`) — o npm vai buscar
 
 ```bash
 node --version > .nvmrc
-# Gera um arquivo com o conteúdo: v20.x.x
 ```
 
 **`.env.example`** — documenta as variáveis de ambiente necessárias sem expor valores reais.
 
 ### Compatibilidade entre as dependências principais
 
-Estas versões foram validadas para funcionar juntas:
-
-| Pacote                 | Versão | Depende de                        |
-| ---------------------- | ------ | --------------------------------- |
-| next                   | 14.2.x | react 18.x, react-dom 18.x        |
-| next-auth              | 4.x    | next 14.x                         |
-| prisma                 | 5.x    | @prisma/client 5.x (mesma versão) |
-| @testing-library/react | 14.x   | react 18.x                        |
-| jest                   | 29.x   | —                                 |
+| Pacote                 | Versão  | Depende de                        |
+| ---------------------- | ------- | --------------------------------- |
+| next                   | 14.2.35 | react 18.x, react-dom 18.x        |
+| next-auth              | 4.x     | next 14.x                         |
+| prisma                 | 5.x     | @prisma/client 5.x (mesma versão) |
+| @testing-library/react | 14.x    | react 18.x                        |
+| jest                   | 29.x    | —                                 |
 
 **Atenção:** `prisma` e `@prisma/client` devem ter sempre a mesma versão.
 
 ### Como resolver conflito de dependências
-
-Se o `npm install` retornar erro de conflito:
 
 ```bash
 # 1. Ver o que está conflitando
@@ -569,18 +572,132 @@ npm install --legacy-peer-deps
 # 3. Se ainda falhar, consultar o desenvolvedor antes de forçar
 ```
 
-Nunca usar `--force` sem consultar o desenvolvedor — pode instalar versões incompatíveis silenciosamente.
+Nunca usar `--force` sem consultar o desenvolvedor.
 
 ### Atualizações de dependências
 
 - Não atualizar dependências sem motivo explícito.
-- Antes de atualizar qualquer pacote, rodar `npm test` para ter baseline dos testes.
-- Após atualizar, rodar `npm test` novamente — se algum teste quebrar, reverter a atualização.
+- Antes de atualizar qualquer pacote, rodar os testes para ter baseline.
+- Após atualizar, rodar os testes novamente — se quebrar, reverter.
 - Atualizações de segurança (`npm audit fix`) são permitidas para patches apenas.
 
 ---
 
-## 14. O que o agente NÃO deve fazer
+## 14. Ambiente de desenvolvimento (Docker)
+
+O ambiente de desenvolvimento usa Docker. Next.js e PostgreSQL rodam em containers.
+Em produção, o banco é o Neon — o código não muda, só o `DATABASE_URL`.
+
+### Arquivos de configuração
+
+**`Dockerfile`** — container do Next.js:
+
+```dockerfile
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
+```
+
+**`docker-compose.yml`** — orquestra Next.js + Postgres:
+
+```yaml
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/quimica_dev
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: quimica_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+```
+
+**`.dockerignore`**:
+
+```
+node_modules
+.next
+.env.local
+.git
+```
+
+### Dois ambientes, um código
+
+| Ambiente                 | DATABASE_URL                                                |
+| ------------------------ | ----------------------------------------------------------- |
+| Desenvolvimento (Docker) | `postgresql://postgres:postgres@localhost:5432/quimica_dev` |
+| Produção (Vercel + Neon) | String de conexão do painel do Neon                         |
+
+### Comandos do dia a dia
+
+```bash
+# Subir tudo (primeira vez ou após mudanças no Dockerfile)
+docker compose up --build
+
+# Subir sem rebuild
+docker compose up
+
+# Rodar migrations dentro do container
+docker compose exec app npx prisma migrate dev
+
+# Abrir Prisma Studio
+docker compose exec app npx prisma studio
+
+# Rodar testes dentro do container
+docker compose exec app npm test
+
+# Rodar seed
+docker compose exec app npx prisma db seed
+
+# Parar os containers
+docker compose down
+
+# Parar e apagar os dados do banco (reset completo)
+docker compose down -v
+```
+
+### Regras
+
+- Todos os comandos Prisma e npm devem rodar dentro do container via `docker compose exec app`.
+- Nunca rodar `npx prisma migrate dev` diretamente no host — usar sempre o container.
+- O volume `postgres_data` persiste os dados entre sessões. Usar `down -v` apenas para reset intencional.
+- Não commitar `docker-compose.override.yml` se criado localmente para testes.
+
+---
+
+## 15. O que o agente NÃO deve fazer
 
 - Não escrever código de lógica (API Routes, queries, funções utilitárias) sem escrever o teste antes — seguir o ciclo Red→Green→Refactor da seção 10.
 - Não instalar dependências fora da stack definida na seção 2.
@@ -590,11 +707,12 @@ Nunca usar `--force` sem consultar o desenvolvedor — pode instalar versões in
 - Não hardcodar textos de conteúdo de Química no código — conteúdo vem do banco.
 - Não criar rotas fora da estrutura definida na seção 5.
 - Não usar `console.log` em produção — usar apenas em desenvolvimento e remover antes do commit.
+- Não rodar comandos Prisma ou npm diretamente no host — usar `docker compose exec app`.
 - Não tomar decisões arquiteturais não previstas neste documento sem consultar o desenvolvedor.
 
 ---
 
-## 15. Como pedir ajuda ao agente
+## 16. Como pedir ajuda ao agente
 
 Para melhores resultados, formule pedidos assim:
 
@@ -606,4 +724,4 @@ Evite pedidos amplos como "faça o sistema de aulas" — quebre em tarefas peque
 
 ---
 
-_Última atualização: início do projeto — revisar e atualizar conforme o projeto evolui._
+_Última atualização: adicionado ambiente Docker (seção 14) e corrigida versão do Next.js para 14.2.35._
