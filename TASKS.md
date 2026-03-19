@@ -12,23 +12,23 @@ Siga a ordem das etapas — cada uma depende da anterior.
 
 ## Etapa 1 — Configuração inicial do projeto
 
-- [ ] Inicializar projeto Next.js com TypeScript e Tailwind (`create-next-app`)
-- [ ] Instalar e configurar Jest (`jest`, `@testing-library/react`, `@testing-library/jest-dom`)
-- [ ] Criar `jest.config.ts`
-- [ ] Criar `.env.example` com todas as variáveis necessárias
-- [ ] Criar `.env.local` com valores reais (nunca commitar)
-- [ ] Verificar que `.env.local` está no `.gitignore`
-- [ ] Commit: `chore: configura Next.js, TypeScript, Tailwind e Jest`
+- [x] Inicializar projeto Next.js com TypeScript e Tailwind (`create-next-app`)
+- [x] Instalar e configurar Jest (`jest`, `@testing-library/react`, `@testing-library/jest-dom`)
+- [x] Criar `jest.config.ts`
+- [x] Criar `.env.example` com todas as variáveis necessárias
+- [x] Criar `.env.local` com valores reais (nunca commitar)
+- [x] Verificar que `.env.local` está no `.gitignore`
+- [x] Commit: `chore: configura Next.js, TypeScript, Tailwind e Jest`
 
 ---
 
 ## Etapa 2 — Ambiente Docker
 
-- [ ] Criar `Dockerfile` conforme modelo do `AGENTS.md` (seção 14)
-- [ ] Criar `docker-compose.yml` com serviços `app` e `db`
-- [ ] Criar `.dockerignore`
-- [ ] Rodar `docker compose up --build` e verificar que o site abre em `localhost:3000`
-- [ ] Verificar que o container `db` (Postgres) sobe sem erros
+- [x] Criar `Dockerfile` conforme modelo do `AGENTS.md` (seção 14)
+- [x] Criar `docker-compose.yml` com serviços `app` e `db`
+- [x] Criar `.dockerignore`
+- [x] Rodar `docker compose up --build` e verificar que o site abre em `localhost:3000`
+- [x] Verificar que o container `db` (Postgres) sobe sem erros
 - [ ] Commit: `chore: adiciona ambiente Docker com Next.js e Postgres`
 
 ---
@@ -161,8 +161,8 @@ Siga a ordem das etapas — cada uma depende da anterior.
 
 | Etapa                    | Status          |
 | ------------------------ | --------------- |
-| 1 — Configuração inicial | 🟡 em andamento |
-| 2 — Ambiente Docker      | ⬜ não iniciada |
+| 1 — Configuração inicial | ✅ em andamento |
+| 2 — Ambiente Docker      | 🟡 não iniciada |
 | 3 — Banco de dados       | ⬜ não iniciada |
 | 4 — API Routes (TDD)     | ⬜ não iniciada |
 | 5 — Componentes base     | ⬜ não iniciada |
