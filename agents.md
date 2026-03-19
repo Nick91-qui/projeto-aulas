@@ -17,11 +17,12 @@ Em caso de dúvida sobre uma decisão técnica, consulte este documento antes de
 7. [Autenticação](#7-autenticação)
 8. [Padrões de código](#8-padrões-de-código)
 9. [Visual e estilo](#9-visual-e-estilo)
-10. [Testes](#10-testes)
+10. [Testes (TDD pragmático)](#10-testes-abordagem-tdd-pragmático)
 11. [Git e commits](#11-git-e-commits)
 12. [Roadmap de desenvolvimento](#12-roadmap-de-desenvolvimento)
-13. [O que o agente NÃO deve fazer](#13-o-que-o-agente-não-deve-fazer)
-14. [Como pedir ajuda ao agente](#14-como-pedir-ajuda-ao-agente)
+13. [Gerenciamento de dependências e conflitos](#13-gerenciamento-de-dependências-e-conflitos)
+14. [O que o agente NÃO deve fazer](#14-o-que-o-agente-não-deve-fazer)
+15. [Como pedir ajuda ao agente](#15-como-pedir-ajuda-ao-agente)
 
 ---
 
@@ -40,18 +41,20 @@ O objetivo principal é disponibilizar conteúdos de aula de forma organizada e 
 
 Não sugira tecnologias fora desta lista sem justificativa explícita e aprovação do desenvolvedor.
 
-| Camada                    | Tecnologia                           | Versão |
-| ------------------------- | ------------------------------------ | ------ |
-| Framework                 | Next.js (App Router)                 | 14+    |
-| Linguagem                 | TypeScript                           | 5+     |
-| Estilo                    | Tailwind CSS                         | 3+     |
-| Banco de dados            | PostgreSQL via Neon (serverless)     | —      |
-| ORM                       | Prisma                               | 5+     |
-| Autenticação              | NextAuth.js                          | 4+     |
-| Deploy                    | Vercel                               | —      |
-| Armazenamento de arquivos | Google Drive (links externos) no MVP | —      |
-| Testes                    | Jest + Testing Library               | —      |
-| Controle de versão        | Git + GitHub                         | —      |
+| Camada                    | Tecnologia                           | Versão exata |
+| ------------------------- | ------------------------------------ | ------------ |
+| Runtime                   | Node.js                              | 20 LTS       |
+| Framework                 | Next.js (App Router)                 | 14.2.x       |
+| Linguagem                 | TypeScript                           | 5.x          |
+| Estilo                    | Tailwind CSS                         | 3.4.x        |
+| Banco de dados            | PostgreSQL via Neon (serverless)     | —            |
+| ORM                       | Prisma                               | 5.x          |
+| Autenticação              | NextAuth.js                          | 4.x          |
+| Deploy                    | Vercel                               | —            |
+| Armazenamento de arquivos | Google Drive (links externos) no MVP | —            |
+| Testes                    | Jest                                 | 29.x         |
+| Testes                    | @testing-library/react               | 14.x         |
+| Controle de versão        | Git + GitHub                         | —            |
 
 ### Decisões técnicas já tomadas (não reabrir)
 
@@ -502,7 +505,82 @@ refactor: extrai lógica de busca para lib/queries.ts
 
 ---
 
-## 13. O que o agente NÃO deve fazer
+## 13. Gerenciamento de dependências e conflitos
+
+### Semver — o que significam os números de versão
+
+```
+next  14.2.5
+       │ │ └─ PATCH — correção de bug, seguro atualizar
+       │ └─── MINOR — funcionalidade nova, geralmente seguro
+       └───── MAJOR — pode quebrar o código existente
+```
+
+### Regra de ouro: sempre instalar com versão exata
+
+```bash
+# Correto — salva a versão exata no package.json
+npm install next@14.2.5 --save-exact
+
+# Ou configurar o npm para sempre salvar exato (fazer uma vez)
+npm config set save-exact true
+```
+
+Nunca instalar sem especificar versão (`npm install next`) — o npm vai buscar a última versão disponível, que pode ser incompatível.
+
+### Três arquivos que protegem o projeto
+
+**`package-lock.json`** — gerado automaticamente pelo npm. Registra as versões exatas de todas as dependências. Deve estar sempre no Git. Nunca adicionar ao `.gitignore`.
+
+**`.nvmrc`** — fixa a versão do Node.js. Criar na raiz do projeto:
+
+```bash
+node --version > .nvmrc
+# Gera um arquivo com o conteúdo: v20.x.x
+```
+
+**`.env.example`** — documenta as variáveis de ambiente necessárias sem expor valores reais.
+
+### Compatibilidade entre as dependências principais
+
+Estas versões foram validadas para funcionar juntas:
+
+| Pacote                 | Versão | Depende de                        |
+| ---------------------- | ------ | --------------------------------- |
+| next                   | 14.2.x | react 18.x, react-dom 18.x        |
+| next-auth              | 4.x    | next 14.x                         |
+| prisma                 | 5.x    | @prisma/client 5.x (mesma versão) |
+| @testing-library/react | 14.x   | react 18.x                        |
+| jest                   | 29.x   | —                                 |
+
+**Atenção:** `prisma` e `@prisma/client` devem ter sempre a mesma versão.
+
+### Como resolver conflito de dependências
+
+Se o `npm install` retornar erro de conflito:
+
+```bash
+# 1. Ver o que está conflitando
+npm ls nome-do-pacote
+
+# 2. Tentar resolver automaticamente
+npm install --legacy-peer-deps
+
+# 3. Se ainda falhar, consultar o desenvolvedor antes de forçar
+```
+
+Nunca usar `--force` sem consultar o desenvolvedor — pode instalar versões incompatíveis silenciosamente.
+
+### Atualizações de dependências
+
+- Não atualizar dependências sem motivo explícito.
+- Antes de atualizar qualquer pacote, rodar `npm test` para ter baseline dos testes.
+- Após atualizar, rodar `npm test` novamente — se algum teste quebrar, reverter a atualização.
+- Atualizações de segurança (`npm audit fix`) são permitidas para patches apenas.
+
+---
+
+## 14. O que o agente NÃO deve fazer
 
 - Não escrever código de lógica (API Routes, queries, funções utilitárias) sem escrever o teste antes — seguir o ciclo Red→Green→Refactor da seção 10.
 - Não instalar dependências fora da stack definida na seção 2.
@@ -516,7 +594,7 @@ refactor: extrai lógica de busca para lib/queries.ts
 
 ---
 
-## 14. Como pedir ajuda ao agente
+## 15. Como pedir ajuda ao agente
 
 Para melhores resultados, formule pedidos assim:
 
@@ -528,4 +606,4 @@ Evite pedidos amplos como "faça o sistema de aulas" — quebre em tarefas peque
 
 ---
 
--
+_Última atualização: início do projeto — revisar e atualizar conforme o projeto evolui._
