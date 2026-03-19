@@ -12,13 +12,13 @@ Siga a ordem das etapas — cada uma depende da anterior.
 
 ## Etapa 1 — Configuração inicial
 
-- [ ] Inicializar projeto Next.js com TypeScript e Tailwind (`create-next-app`)
-- [ ] Instalar e configurar Jest (`jest`, `@testing-library/react`, `@testing-library/jest-dom`)
-- [ ] Criar `jest.config.ts`
-- [ ] Criar `.env.example` com todas as variáveis necessárias
-- [ ] Criar `.env.local` com valores reais (nunca commitar)
-- [ ] Verificar que `.env.local` está no `.gitignore`
-- [ ] Commit: `chore: configura Next.js, TypeScript, Tailwind e Jest`
+- [x] Inicializar projeto Next.js com TypeScript e Tailwind (`create-next-app`)
+- [x] Instalar e configurar Jest (`jest`, `@testing-library/react`, `@testing-library/jest-dom`)
+- [x] Criar `jest.config.ts`
+- [x] Criar `.env.example` com todas as variáveis necessárias
+- [x] Criar `.env.local` com valores reais (nunca commitar)
+- [x] Verificar que `.env.local` está no `.gitignore`
+- [x] Commit: `chore: configura Next.js, TypeScript, Tailwind e Jest`
 
 ---
 
@@ -41,6 +41,7 @@ Siga a ordem das etapas — cada uma depende da anterior.
 > Nesta etapa: escrever o teste ANTES do código (Red → Green → Refactor)
 
 ### Aulas
+
 - [ ] Escrever testes: `tests/api/aulas.test.ts`
   - [ ] GET retorna apenas aulas publicadas
   - [ ] GET retorna 500 se o banco falhar
@@ -48,6 +49,7 @@ Siga a ordem das etapas — cada uma depende da anterior.
 - [ ] Verificar testes passando: `npm test`
 
 ### Assuntos
+
 - [ ] Escrever testes: `tests/api/assuntos.test.ts`
   - [ ] GET retorna lista de assuntos com suas aulas publicadas
   - [ ] GET retorna 500 se o banco falhar
@@ -110,11 +112,13 @@ Siga a ordem das etapas — cada uma depende da anterior.
 - [ ] Criar dashboard admin: `src/app/admin/page.tsx`
 
 ### CRUD de assuntos
+
 - [ ] Escrever testes: `tests/api/assuntos-admin.test.ts` (POST protegido)
 - [ ] Implementar POST em `src/app/api/assuntos/route.ts`
 - [ ] Criar página de gerenciamento: `src/app/admin/assuntos/page.tsx`
 
 ### CRUD de aulas
+
 - [ ] Escrever testes: `tests/api/aulas-admin.test.ts` (POST, PUT, DELETE protegidos)
 - [ ] Implementar POST em `src/app/api/aulas/route.ts`
 - [ ] Criar listagem admin: `src/app/admin/aulas/page.tsx`
@@ -139,18 +143,18 @@ Siga a ordem das etapas — cada uma depende da anterior.
 
 ## Progresso geral
 
-| Etapa | Status |
-|---|---|
-| 1 — Configuração inicial | ⬜ não iniciada |
-| 2 — Banco de dados | ⬜ não iniciada |
-| 3 — API Routes (TDD) | ⬜ não iniciada |
-| 4 — Componentes base | ⬜ não iniciada |
-| 5 — Páginas públicas | ⬜ não iniciada |
-| 6 — Deploy MVP | ⬜ não iniciada |
-| 7 — Painel admin | ⬜ não iniciada |
-| 8 — Melhorias futuras | ⬜ não iniciada |
+| Etapa                    | Status          |
+| ------------------------ | --------------- |
+| 1 — Configuração inicial | ✅ concluída    |
+| 2 — Banco de dados       | ⬜ não iniciada |
+| 3 — API Routes (TDD)     | ⬜ não iniciada |
+| 4 — Componentes base     | ⬜ não iniciada |
+| 5 — Páginas públicas     | ⬜ não iniciada |
+| 6 — Deploy MVP           | ⬜ não iniciada |
+| 7 — Painel admin         | ⬜ não iniciada |
+| 8 — Melhorias futuras    | ⬜ não iniciada |
 
 ---
 
-*Atualizar a tabela de progresso conforme as etapas forem concluídas.*
-*⬜ não iniciada · 🟡 em andamento · ✅ concluída*
+_Atualizar a tabela de progresso conforme as etapas forem concluídas._
+_⬜ não iniciada · 🟡 em andamento · ✅ concluída_
