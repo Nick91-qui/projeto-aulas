@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Assunto {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  nome      String
+  descricao String?
+  ordem     Int      @default(0)
+  aulas     Aula[]
+  criadoEm  DateTime @default(now())
+}
+
+model Aula {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  titulo    String
+  descricao String?
+  conteudo  String?  @db.Text
+  publicada Boolean  @default(false)
+  ordem     Int      @default(0)
+  criadaEm  DateTime @default(now())
+
+  assuntoId String
+  assunto   Assunto   @relation(fields: [assuntoId], references: [id])
+  arquivos  Arquivo[]
+}
+
+model Arquivo {
+  id     String @id @default(cuid())
+  nome   String
+  url    String
+  tipo   String // "slides" | "texto" | "exercicio" | "imagem"
+  aulaId String
+  aula   Aula   @relation(fields: [aulaId], references: [id], onDelete: Cascade)
+}

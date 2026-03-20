@@ -40,11 +40,11 @@ Siga a ordem das etapas — cada uma depende da anterior.
 
 - [ ] Instalar Prisma (`prisma`, `@prisma/client`) dentro do container
 - [ ] Rodar `docker compose exec app npx prisma init`
-- [ ] Criar `prisma/schema.prisma` conforme modelo do `AGENTS.md` (seção 4)
+- [x] Criar `prisma/schema.prisma` conforme modelo do `AGENTS.md` (seção 4)
 - [ ] Confirmar que `DATABASE_URL` no container aponta para o Postgres local (`@db:5432`)
 - [ ] Rodar primeira migration: `docker compose exec app npx prisma migrate dev --name init`
-- [ ] Criar `src/lib/prisma.ts` (instância global do PrismaClient)
-- [ ] Criar `prisma/seed.ts` com pelo menos 1 assunto e 1 aula de exemplo
+- [x] Criar `src/lib/prisma.ts` (instância global do PrismaClient)
+- [x] Criar `prisma/seed.ts` com pelo menos 1 assunto e 1 aula de exemplo
 - [ ] Rodar seed: `docker compose exec app npx prisma db seed`
 - [ ] Verificar dados no Prisma Studio: `docker compose exec app npx prisma studio`
 - [ ] Commit: `chore: configura Prisma e banco de dados local`

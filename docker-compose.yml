@@ -4,16 +4,18 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/app:z
-      - /app/node_modules
+      - .:/app:Z
+      - /app/node_modules # ← NOVA LINHA: exclui do volume
+      - /app/.next # ← NOVA LINHA: exclui do volume
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/quimica_dev
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/quimica_dev
     depends_on:
       db:
         condition: service_healthy
 
   db:
     image: postgres:16-alpine
+    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
