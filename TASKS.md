@@ -29,7 +29,7 @@ Siga a ordem das etapas — cada uma depende da anterior.
 - [x] Criar `.dockerignore`
 - [x] Rodar `docker compose up --build` e verificar que o site abre em `localhost:3000`
 - [x] Verificar que o container `db` (Postgres) sobe sem erros
-- [ ] Commit: `chore: adiciona ambiente Docker com Next.js e Postgres`
+- [x] Commit: `chore: adiciona ambiente Docker com Next.js e Postgres`
 
 ---
 
@@ -38,16 +38,16 @@ Siga a ordem das etapas — cada uma depende da anterior.
 > A partir desta etapa, todos os comandos Prisma rodam dentro do container:
 > `docker compose exec app npx prisma ...`
 
-- [ ] Instalar Prisma (`prisma`, `@prisma/client`) dentro do container
-- [ ] Rodar `docker compose exec app npx prisma init`
+- [x] Instalar Prisma (`prisma`, `@prisma/client`) dentro do container
+- [x] Rodar `docker compose exec app npx prisma init`
 - [x] Criar `prisma/schema.prisma` conforme modelo do `AGENTS.md` (seção 4)
-- [ ] Confirmar que `DATABASE_URL` no container aponta para o Postgres local (`@db:5432`)
-- [ ] Rodar primeira migration: `docker compose exec app npx prisma migrate dev --name init`
+- [x] Confirmar que `DATABASE_URL` no container aponta para o Postgres local (`@db:5432`)
+- [x] Rodar primeira migration: `docker compose exec app npx prisma migrate dev --name init`
 - [x] Criar `src/lib/prisma.ts` (instância global do PrismaClient)
 - [x] Criar `prisma/seed.ts` com pelo menos 1 assunto e 1 aula de exemplo
-- [ ] Rodar seed: `docker compose exec app npx prisma db seed`
+- [x] Rodar seed: `docker compose exec app npx prisma db seed`
 - [ ] Verificar dados no Prisma Studio: `docker compose exec app npx prisma studio`
-- [ ] Commit: `chore: configura Prisma e banco de dados local`
+- [x] Commit: `chore: configura Prisma e banco de dados local`
 
 ---
 
@@ -162,8 +162,8 @@ Siga a ordem das etapas — cada uma depende da anterior.
 | Etapa                    | Status          |
 | ------------------------ | --------------- |
 | 1 — Configuração inicial | ✅ em andamento |
-| 2 — Ambiente Docker      | 🟡 não iniciada |
-| 3 — Banco de dados       | ⬜ não iniciada |
+| 2 — Ambiente Docker      | ✅ concluída    |
+| 3 — Banco de dados       | ✅ concluída    |
 | 4 — API Routes (TDD)     | ⬜ não iniciada |
 | 5 — Componentes base     | ⬜ não iniciada |
 | 6 — Páginas públicas     | ⬜ não iniciada |

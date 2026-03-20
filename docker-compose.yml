@@ -3,10 +3,12 @@ services:
     build: .
     ports:
       - "3000:3000"
+      - "5555:5555"
     volumes:
       - .:/app:Z
       - /app/node_modules # ← NOVA LINHA: exclui do volume
       - /app/.next # ← NOVA LINHA: exclui do volume
+    user: "root"
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/quimica_dev
     depends_on:
