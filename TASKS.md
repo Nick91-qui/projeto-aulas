@@ -46,7 +46,7 @@ Siga a ordem das etapas — cada uma depende da anterior.
 - [x] Criar `src/lib/prisma.ts` (instância global do PrismaClient)
 - [x] Criar `prisma/seed.ts` com pelo menos 1 assunto e 1 aula de exemplo
 - [x] Rodar seed: `docker compose exec app npx prisma db seed`
-- [ ] Verificar dados no Prisma Studio: `docker compose exec app npx prisma studio`
+- [x] Verificar dados no Prisma Studio: `docker compose exec app npx prisma studio`
 - [x] Commit: `chore: configura Prisma e banco de dados local`
 
 ---
@@ -57,19 +57,19 @@ Siga a ordem das etapas — cada uma depende da anterior.
 
 ### Aulas
 
-- [ ] Escrever testes: `tests/api/aulas.test.ts`
-  - [ ] GET retorna apenas aulas publicadas
-  - [ ] GET retorna 500 se o banco falhar
-- [ ] Implementar `src/app/api/aulas/route.ts` (GET)
-- [ ] Verificar testes passando: `docker compose exec app npm test`
+- [x] Escrever testes: `tests/api/aulas.test.ts`
+  - [x] GET retorna apenas aulas publicadas
+  - [x] GET retorna 500 se o banco falhar
+- [x] Implementar `src/app/api/aulas/route.ts` (GET)
+- [x] Verificar testes passando: `docker compose exec app npm test`
 
 ### Assuntos
 
-- [ ] Escrever testes: `tests/api/assuntos.test.ts`
-  - [ ] GET retorna lista de assuntos com suas aulas publicadas
-  - [ ] GET retorna 500 se o banco falhar
-- [ ] Implementar `src/app/api/assuntos/route.ts` (GET)
-- [ ] Verificar testes passando: `docker compose exec app npm test`
+- [x] Escrever testes: `tests/api/assuntos.test.ts`
+  - [x] GET retorna lista de assuntos com suas aulas publicadas
+  - [x] GET retorna 500 se o banco falhar
+- [x] Implementar `src/app/api/assuntos/route.ts` (GET)
+- [x] Verificar testes passando: `docker compose exec app npm test`
 
 - [ ] Commit: `feat: adiciona API Routes de aulas e assuntos com testes`
 
@@ -164,7 +164,7 @@ Siga a ordem das etapas — cada uma depende da anterior.
 | 1 — Configuração inicial | ✅ em andamento |
 | 2 — Ambiente Docker      | ✅ concluída    |
 | 3 — Banco de dados       | ✅ concluída    |
-| 4 — API Routes (TDD)     | ⬜ não iniciada |
+| 4 — API Routes (TDD)     | 🟡 em andamento |
 | 5 — Componentes base     | ⬜ não iniciada |
 | 6 — Páginas públicas     | ⬜ não iniciada |
 | 7 — Deploy MVP           | ⬜ não iniciada |
