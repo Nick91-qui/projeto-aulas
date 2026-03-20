@@ -88,20 +88,20 @@ Siga a ordem das etapas — cada uma depende da anterior.
 - [x] Criar `src/components/ui/Badge.tsx`
 - [x] Escrever testes: `tests/components/AulaCard.test.tsx`
 - [x] Escrever testes: `tests/components/ArquivoLink.test.tsx`
-- [ ] Verificar testes passando: `docker compose exec app npm test`
-- [ ] Commit: `feat: adiciona componentes base e layout raiz`
+- [x] Verificar testes passando: `docker compose exec app npm test`
+- [x] Commit: `feat: adiciona componentes base e layout raiz`
 
 ---
 
 ## Etapa 6 — Páginas públicas
 
-- [ ] Criar `src/app/page.tsx` (página inicial)
-- [ ] Criar `src/app/assuntos/page.tsx` (listagem de assuntos)
-- [ ] Criar `src/app/assuntos/[slug]/page.tsx` (página do assunto com suas aulas)
-- [ ] Criar `src/app/assuntos/[slug]/[aulaSlug]/page.tsx` (página individual da aula)
-- [ ] Verificar navegação entre páginas funcionando localmente
-- [ ] Verificar responsividade (mobile e desktop)
-- [ ] Commit: `feat: adiciona páginas públicas do site`
+- [x] Criar `src/app/page.tsx` (página inicial)
+- [x] Criar `src/app/assuntos/page.tsx` (listagem de assuntos)
+- [x] Criar `src/app/assuntos/[slug]/page.tsx` (página do assunto com suas aulas)
+- [x] Criar `src/app/assuntos/[slug]/[aulaSlug]/page.tsx` (página individual da aula)
+- [x] Verificar navegação entre páginas funcionando localmente
+- [x] Verificar responsividade (mobile e desktop)
+- [x] Commit: `feat: adiciona páginas públicas do site`
 
 ---
 
@@ -165,9 +165,9 @@ Siga a ordem das etapas — cada uma depende da anterior.
 | 2 — Ambiente Docker      | ✅ concluída    |
 | 3 — Banco de dados       | ✅ concluída    |
 | 4 — API Routes (TDD)     | 🟡 em andamento |
-| 5 — Componentes base     | 🟡 em andamento |
-| 6 — Páginas públicas     | ⬜ não iniciada |
-| 7 — Deploy MVP           | ⬜ não iniciada |
+| 5 — Componentes base     | ✅ concluída    |
+| 6 — Páginas públicas     | ✅ concluída    |
+| 7 — Deploy MVP           | 🟡 em andamento |
 | 8 — Painel admin         | ⬜ não iniciada |
 | 9 — Melhorias futuras    | ⬜ não iniciada |
 
