@@ -79,13 +79,13 @@ Siga a ordem das etapas — cada uma depende da anterior.
 
 > Nesta etapa: testes após o código (componentes visuais)
 
-- [ ] Criar `src/app/layout.tsx` (layout raiz com fonte Inter, Header e Footer)
-- [ ] Criar `src/components/layout/Header.tsx`
-- [ ] Criar `src/components/layout/Footer.tsx`
-- [ ] Criar `src/components/aulas/AulaCard.tsx`
-- [ ] Criar `src/components/aulas/ArquivoLink.tsx`
-- [ ] Criar `src/components/ui/Button.tsx`
-- [ ] Criar `src/components/ui/Badge.tsx`
+- [x] Criar `src/app/layout.tsx` (layout raiz com fonte Inter, Header e Footer)
+- [x] Criar `src/components/layout/Header.tsx`
+- [x] Criar `src/components/layout/Footer.tsx`
+- [x] Criar `src/components/aulas/AulaCard.tsx`
+- [x] Criar `src/components/aulas/ArquivoLink.tsx`
+- [x] Criar `src/components/ui/Button.tsx`
+- [x] Criar `src/components/ui/Badge.tsx`
 - [ ] Escrever testes: `tests/components/AulaCard.test.tsx`
 - [ ] Escrever testes: `tests/components/ArquivoLink.test.tsx`
 - [ ] Verificar testes passando: `docker compose exec app npm test`
@@ -165,7 +165,7 @@ Siga a ordem das etapas — cada uma depende da anterior.
 | 2 — Ambiente Docker      | ✅ concluída    |
 | 3 — Banco de dados       | ✅ concluída    |
 | 4 — API Routes (TDD)     | 🟡 em andamento |
-| 5 — Componentes base     | ⬜ não iniciada |
+| 5 — Componentes base     | 🟡 em andamento |
 | 6 — Páginas públicas     | ⬜ não iniciada |
 | 7 — Deploy MVP           | ⬜ não iniciada |
 | 8 — Painel admin         | ⬜ não iniciada |
