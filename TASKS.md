@@ -86,8 +86,8 @@ Siga a ordem das etapas — cada uma depende da anterior.
 - [x] Criar `src/components/aulas/ArquivoLink.tsx`
 - [x] Criar `src/components/ui/Button.tsx`
 - [x] Criar `src/components/ui/Badge.tsx`
-- [ ] Escrever testes: `tests/components/AulaCard.test.tsx`
-- [ ] Escrever testes: `tests/components/ArquivoLink.test.tsx`
+- [x] Escrever testes: `tests/components/AulaCard.test.tsx`
+- [x] Escrever testes: `tests/components/ArquivoLink.test.tsx`
 - [ ] Verificar testes passando: `docker compose exec app npm test`
 - [ ] Commit: `feat: adiciona componentes base e layout raiz`
 
