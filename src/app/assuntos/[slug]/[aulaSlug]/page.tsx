@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import type { Arquivo } from "@prisma/client";
 import { ArquivoLink } from "@/components/aulas/ArquivoLink";
 import Link from "next/link";
 
@@ -62,7 +63,7 @@ export default async function AulaPage({ params }: Props) {
             Materiais de Apoio
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {aula.arquivos.map((arquivo) => (
+            {aula.arquivos.map((arquivo: Arquivo) => (
               <ArquivoLink key={arquivo.id} arquivo={arquivo} />
             ))}
           </div>
