@@ -120,9 +120,9 @@ Siga a ordem das etapas — cada uma depende da anterior.
 
 > Início da Fase 2 — só iniciar após o MVP estar no ar e funcionando
 
-- [ ] Instalar NextAuth.js (`next-auth`, `bcryptjs`)
-- [ ] Criar `src/lib/auth.ts` com configuração do provider Credentials
-- [ ] Criar `src/app/api/auth/[...nextauth]/route.ts`
+- [x] Instalar NextAuth.js (`next-auth`, `bcryptjs`)
+- [x] Criar `src/lib/auth.ts` com configuração do provider Credentials
+- [x] Criar `src/app/api/auth/[...nextauth]/route.ts`
 - [ ] Criar página de login: `src/app/admin/login/page.tsx`
 - [ ] Criar `src/app/admin/layout.tsx` com verificação de sessão
 - [ ] Criar dashboard admin: `src/app/admin/page.tsx`

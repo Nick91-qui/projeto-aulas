@@ -16,6 +16,7 @@
     "docker:up": "docker compose up -d",
     "docker:build": "docker compose up --build",
     "docker:down": "docker compose down",
+    "docker:install": "docker compose run --rm app npm install",
     "docker:clean": "docker compose down -v --remove-orphans",
     "docker:prune": "docker system prune -f",
     "docker:prisma:generate": "docker compose exec app npx prisma generate",
@@ -32,10 +33,13 @@
     "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
-    "@prisma/client": "^5.22.0"
+    "@prisma/client": "^5.22.0",
+    "bcryptjs": "^2.4.3",
+    "next-auth": "^4.24.7"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.0",
+    "@types/bcryptjs": "^2.4.6",
     "@testing-library/react": "^14.2.0",
     "@types/jest": "^29.5.0",
     "@types/node": "20.19.37",
