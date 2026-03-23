@@ -9,6 +9,7 @@
     "postinstall": "prisma generate",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
+    "prisma:deploy": "prisma migrate deploy",
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -17,6 +18,7 @@
     "docker:down": "docker compose down",
     "docker:prisma:generate": "docker compose exec app npx prisma generate",
     "docker:prisma:migrate": "docker compose exec app npx prisma migrate dev",
+    "docker:prisma:deploy": "docker compose exec app npx prisma migrate deploy",
     "docker:prisma:seed": "docker compose exec app npx prisma db seed",
     "docker:prisma:studio": "docker compose exec -d app npx prisma studio",
     "docker:test": "docker compose exec app npm test"
