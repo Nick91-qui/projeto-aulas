@@ -3,29 +3,54 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  const assunto = await prisma.assunto.upsert({
-    where: { slug: "ligacoes-quimicas" },
-    update: {},
-    create: {
-      slug: "ligacoes-quimicas",
-      nome: "Ligações Químicas",
-      descricao: "Entenda como os átomos se unem para formar compostos.",
+  // Limpar dados antigos para garantir um estado limpo
+  await prisma.arquivo.deleteMany();
+  await prisma.aula.deleteMany();
+  await prisma.assunto.deleteMany();
+
+  console.log("Banco de dados limpo.");
+
+  // Criar Assunto: Química Geral
+  const assunto = await prisma.assunto.create({
+    data: {
+      nome: "Química Geral",
+      slug: "quimica-geral",
+      descricao:
+        "Conceitos fundamentais da química, estrutura da matéria e reações.",
       ordem: 1,
-      aulas: {
-        create: {
-          slug: "ligacoes-ionicas",
-          titulo: "Ligações Iônicas",
-          descricao: "Transferência de elétrons entre metais e não-metais.",
-          conteudo:
-            "As ligações iônicas ocorrem quando há transferência definitiva de elétrons...",
-          publicada: true,
-          ordem: 1,
-        },
-      },
     },
   });
 
-  console.log({ assunto });
+  console.log(`Assunto criado: ${assunto.nome}`);
+
+  // Criar Aula 1
+  await prisma.aula.create({
+    data: {
+      titulo: "Introdução à Matéria",
+      slug: "introducao-materia",
+      descricao: "Definição de matéria, massa e volume. Estados físicos.",
+      conteudo:
+        "# Introdução à Matéria\n\nMatéria é tudo aquilo que tem massa e ocupa lugar no espaço.",
+      publicada: true,
+      ordem: 1,
+      assuntoId: assunto.id,
+    },
+  });
+
+  // Criar Aula 2
+  await prisma.aula.create({
+    data: {
+      titulo: "Estrutura Atômica",
+      slug: "estrutura-atomica",
+      descricao: "Prótons, nêutrons e elétrons. Modelos atômicos.",
+      conteudo: "# O Átomo\n\nA unidade básica da matéria.",
+      publicada: true,
+      ordem: 2,
+      assuntoId: assunto.id,
+    },
+  });
+
+  console.log("Aulas criadas com sucesso.");
 }
 
 main()

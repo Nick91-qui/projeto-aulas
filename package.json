@@ -11,7 +11,15 @@
     "prisma:migrate": "prisma migrate dev",
     "lint": "next lint",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "docker:up": "docker compose up -d",
+    "docker:build": "docker compose up --build",
+    "docker:down": "docker compose down",
+    "docker:prisma:generate": "docker compose exec app npx prisma generate",
+    "docker:prisma:migrate": "docker compose exec app npx prisma migrate dev",
+    "docker:prisma:seed": "docker compose exec app npx prisma db seed",
+    "docker:prisma:studio": "docker compose exec -d app npx prisma studio",
+    "docker:test": "docker compose exec app npm test"
   },
   "prisma": {
     "seed": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
