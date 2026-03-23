@@ -111,8 +111,8 @@ Siga a ordem das etapas — cada uma depende da anterior.
 - [x] Configurar `DATABASE_URL` do Neon nas variáveis de ambiente da Vercel
 - [x] Configurar demais variáveis de ambiente na Vercel
 - [x] Verificar build sem erros: `docker compose exec app npm run build`
-- [ ] Acessar URL pública e testar todas as páginas
-- [ ] Commit: `chore: configuração de deploy na Vercel`
+- [x] Acessar URL pública e testar todas as páginas
+- [x] Commit: `chore: configuração de deploy na Vercel`
 
 ---
 
@@ -167,8 +167,8 @@ Siga a ordem das etapas — cada uma depende da anterior.
 | 4 — API Routes (TDD)     | 🟡 em andamento |
 | 5 — Componentes base     | ✅ concluída    |
 | 6 — Páginas públicas     | ✅ concluída    |
-| 7 — Deploy MVP           | 🟡 em andamento |
-| 8 — Painel admin         | ⬜ não iniciada |
+| 7 — Deploy MVP           | ✅ concluída    |
+| 8 — Painel admin         | 🟡 em andamento |
 | 9 — Melhorias futuras    | ⬜ não iniciada |
 
 ---
