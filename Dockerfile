@@ -4,7 +4,7 @@ FROM node:20-alpine
 RUN apk add --no-cache openssl
 
 # Criar usuário não-root
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+# RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 WORKDIR /app
 
@@ -17,10 +17,10 @@ RUN npm install
 COPY . .
 
 # Ajustar permissões (ESSENCIAL com Podman)
-RUN chown -R appuser:appgroup /app
+# RUN chown -R appuser:appgroup /app
 
 # Trocar para usuário seguro
-USER appuser
+# USER appuser
 
 EXPOSE 3000
 
