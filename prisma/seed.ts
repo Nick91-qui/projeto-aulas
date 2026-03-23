@@ -3,6 +3,9 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
+  console.log("Iniciando seed...");
+  console.log(`DATABASE_URL definida: ${!!process.env.DATABASE_URL}`);
+
   // Limpar dados antigos para garantir um estado limpo
   await prisma.arquivo.deleteMany();
   await prisma.aula.deleteMany();
