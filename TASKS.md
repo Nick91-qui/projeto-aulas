@@ -124,8 +124,8 @@ Siga a ordem das etapas — cada uma depende da anterior.
 - [x] Criar `src/lib/auth.ts` com configuração do provider Credentials
 - [x] Criar `src/app/api/auth/[...nextauth]/route.ts`
 - [x] Criar página de login: `src/app/admin/login/page.tsx`
-- [ ] Criar `src/app/admin/layout.tsx` com verificação de sessão
-- [ ] Criar dashboard admin: `src/app/admin/page.tsx`
+- [x] Criar `src/app/admin/layout.tsx` com verificação de sessão
+- [x] Criar dashboard admin: `src/app/admin/page.tsx`
 
 ### CRUD de assuntos
 
