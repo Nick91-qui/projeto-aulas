@@ -2,6 +2,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { Badge } from "@/components/ui/Badge";
 
+export const dynamic = "force-dynamic";
 export const revalidate = 60; // Revalida a cada 60 segundos (ISR)
 
 export default async function AssuntosPage() {

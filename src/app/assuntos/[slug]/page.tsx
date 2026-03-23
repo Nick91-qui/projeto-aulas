@@ -7,6 +7,7 @@ type Props = {
   params: { slug: string };
 };
 
+export const dynamic = "force-dynamic";
 export const revalidate = 60;
 
 export default async function AssuntoPage({ params }: Props) {
