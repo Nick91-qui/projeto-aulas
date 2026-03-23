@@ -16,6 +16,8 @@
     "docker:up": "docker compose up -d",
     "docker:build": "docker compose up --build",
     "docker:down": "docker compose down",
+    "docker:clean": "docker compose down -v --remove-orphans",
+    "docker:prune": "docker system prune -f",
     "docker:prisma:generate": "docker compose exec app npx prisma generate",
     "docker:prisma:migrate": "docker compose exec app npx prisma migrate dev",
     "docker:prisma:deploy": "docker compose exec app npx prisma migrate deploy",
