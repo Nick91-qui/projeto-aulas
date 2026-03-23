@@ -100,6 +100,18 @@ Sempre que você alterar o arquivo `prisma/schema.prisma` (ex: adicionar uma tab
     npm run docker:prisma:migrate
     ```
 
+### Resetando e Repopulando o Banco Local (Seed)
+
+O comando `seed` é usado para popular o banco de dados com dados de exemplo. **Importante:** o script `prisma/seed.ts` deste projeto foi configurado para **apagar todos os dados existentes** antes de inserir os novos.
+
+- **Quando usar:** Use este comando sempre que você modificar o arquivo `prisma/seed.ts` e quiser aplicar essas mudanças no seu banco de dados local.
+- **Atenção:** Qualquer dado que você tenha inserido manualmente (pelo Prisma Studio, por exemplo) será perdido.
+
+```bash
+# Apaga o banco e o repopula com os dados de prisma/seed.ts
+npm run docker:prisma:seed
+```
+
 ### Acessando o Banco Local (Ferramentas Externas)
 
 Para "ligar" uma ferramenta visual (como DBeaver ou TablePlus) ao banco de dados do Docker:

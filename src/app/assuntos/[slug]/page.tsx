@@ -12,17 +12,15 @@ export default async function AssuntoPage({
 }: {
   params: { slug: string };
 }) {
-  const assunto = await prisma.assunto
-    .findMany({
-      where: { slug: params.slug },
-      include: {
-        aulas: {
-          where: { publicada: true }, // Apenas aulas publicadas aparecem
-          orderBy: { ordem: "asc" },
-        },
+  const assunto = await prisma.assunto.findUnique({
+    where: { slug: params.slug },
+    include: {
+      aulas: {
+        where: { publicada: true }, // Apenas aulas publicadas aparecem
+        orderBy: { ordem: "asc" },
       },
-    })
-    .then((res) => res[0]); // findUnique às vezes falha com slug se não for @unique no prisma schema exato, findMany é mais seguro aqui ou garanta que slug é unique
+    },
+  });
 
   if (!assunto) {
     notFound();

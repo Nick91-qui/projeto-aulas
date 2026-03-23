@@ -24,7 +24,7 @@ async function main() {
     },
   });
 
-  console.log(`Assunto criado: ${assunto.nome}`);
+  console.log(`✅ Assunto criado: ${assunto.nome} (ID: ${assunto.id})`);
 
   // Criar Aula 1
   await prisma.aula.create({
@@ -39,6 +39,7 @@ async function main() {
       assuntoId: assunto.id,
     },
   });
+  console.log("✅ Aula 1 criada");
 
   // Criar Aula 2
   await prisma.aula.create({
@@ -52,8 +53,9 @@ async function main() {
       assuntoId: assunto.id,
     },
   });
+  console.log("✅ Aula 2 criada");
 
-  console.log("Aulas criadas com sucesso.");
+  console.log("🚀 Seed finalizado com sucesso!");
 }
 
 main()

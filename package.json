@@ -14,20 +14,21 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "docker:up": "docker compose up -d",
-    "docker:build": "docker compose up --build",
+    "docker:build": "docker compose up -d --build",
     "docker:down": "docker compose down",
     "docker:install": "docker compose run --rm app npm install",
     "docker:clean": "docker compose down -v --remove-orphans",
     "docker:prune": "docker system prune -f",
     "docker:prisma:generate": "docker compose exec app npx prisma generate",
-    "docker:prisma:migrate": "docker compose exec app npx prisma migrate dev",
-    "docker:prisma:deploy": "docker compose exec app npx prisma migrate deploy",
-    "docker:prisma:seed": "docker compose exec app npx prisma db seed",
+    "docker:prisma:migrate": "docker compose run --rm app npx prisma migrate dev",
+    "docker:prisma:deploy": "docker compose run --rm app npx prisma migrate deploy",
+    "docker:prisma:seed": "docker compose run --rm app npx ts-node --project prisma/tsconfig.json prisma/seed.ts",
     "docker:prisma:studio": "docker compose exec -d app npx prisma studio",
-    "docker:test": "docker compose exec app npm test"
+    "docker:test": "docker compose exec app npm test",
+    "docker:reset": "npm run docker:clean && npm run docker:prisma:migrate && npm run docker:prisma:seed && npm run docker:up"
   },
   "prisma": {
-    "seed": "prisma generate && npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    "seed": "prisma generate && npx ts-node --project prisma/tsconfig.json prisma/seed.ts"
   },
   "dependencies": {
     "next": "14.2.35",
