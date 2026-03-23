@@ -107,9 +107,9 @@ Siga a ordem das etapas — cada uma depende da anterior.
 
 ## Etapa 7 — Deploy MVP
 
-- [ ] Conectar repositório GitHub à Vercel (já existente)
-- [ ] Configurar `DATABASE_URL` do Neon nas variáveis de ambiente da Vercel
-- [ ] Configurar demais variáveis de ambiente na Vercel
+- [x] Conectar repositório GitHub à Vercel (já existente)
+- [x] Configurar `DATABASE_URL` do Neon nas variáveis de ambiente da Vercel
+- [x] Configurar demais variáveis de ambiente na Vercel
 - [x] Verificar build sem erros: `docker compose exec app npm run build`
 - [ ] Acessar URL pública e testar todas as páginas
 - [ ] Commit: `chore: configuração de deploy na Vercel`
