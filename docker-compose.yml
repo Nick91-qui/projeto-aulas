@@ -9,11 +9,11 @@ services:
       - /app/node_modules # ← NOVA LINHA: exclui do volume
       - /app/.next # ← NOVA LINHA: exclui do volume
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/quimica_dev
-    depends_on:
-      db:
-        condition: service_healthy
-
+      DATABASE_URL: postgresql://user:password@localhost:5432/quimica_db
+      NEXTAUTH_SECRET: secret-temporario-desenvolvimento
+      NEXTAUTH_URL: http://localhost:3000
+      ADMIN_EMAIL: professor@exemplo.com
+      ADMIN_PASSWORD_HASH: $$2a$$10$$Bltc8oGvgCdswyHxpj3eie.2rjSnwm0dx4UsUaMVfbj.LhJ0LOQDC
   db:
     image: postgres:16-alpine
     restart: always
@@ -22,7 +22,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: quimica_dev
     ports:
-      - "5433:5432"
+      - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

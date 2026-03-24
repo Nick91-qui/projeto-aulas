@@ -18,8 +18,13 @@ export const authOptions: NextAuthOptions = {
         }
 
         // Verificação via variáveis de ambiente (conforme AGENTS.md para MVP)
-        const adminEmail = process.env.ADMIN_EMAIL;
-        const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+        let adminEmail = process.env.ADMIN_EMAIL;
+        let adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+
+        // Remove aspas simples e duplas que podem vir do .env.local
+        adminEmail = adminEmail?.replace(/^['"]|['"]$/g, "") ?? "";
+        adminPasswordHash =
+          adminPasswordHash?.replace(/^['"]|['"]$/g, "") ?? "";
 
         if (!adminEmail || !adminPasswordHash) {
           throw new Error("Credenciais de admin não configuradas no servidor.");
@@ -31,8 +36,14 @@ export const authOptions: NextAuthOptions = {
           if (isValid) {
             return { id: "admin", name: "Professor", email: adminEmail };
           }
+          console.log("Senha incorreta para o email:", email);
+        } else {
+          console.log(
+            `Email não confere. Recebido: "${email}", Esperado: "${adminEmail}"`,
+          );
         }
 
+        console.log("Auth failed");
         return null;
       },
     }),
