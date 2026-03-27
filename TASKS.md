@@ -129,9 +129,9 @@ Siga a ordem das etapas — cada uma depende da anterior.
 
 ### CRUD de assuntos
 
-- [ ] Escrever testes: `tests/api/assuntos-admin.test.ts` (POST protegido)
-- [ ] Implementar POST em `src/app/api/assuntos/route.ts`
-- [ ] Criar página de gerenciamento: `src/app/admin/assuntos/page.tsx`
+- [x] Escrever testes: `tests/api/assuntos-admin.test.ts` (POST protegido)
+- [x] Implementar POST em `src/app/api/assuntos/route.ts`
+- [x] Criar página de gerenciamento: `src/app/admin/assuntos/page.tsx`
 
 ### CRUD de aulas
 
@@ -161,10 +161,10 @@ Siga a ordem das etapas — cada uma depende da anterior.
 
 | Etapa                    | Status          |
 | ------------------------ | --------------- |
-| 1 — Configuração inicial | ✅ em andamento |
+| 1 — Configuração inicial | ✅ concluída    |
 | 2 — Ambiente Docker      | ✅ concluída    |
 | 3 — Banco de dados       | ✅ concluída    |
-| 4 — API Routes (TDD)     | 🟡 em andamento |
+| 4 — API Routes (TDD)     | ✅ concluída    |
 | 5 — Componentes base     | ✅ concluída    |
 | 6 — Páginas públicas     | ✅ concluída    |
 | 7 — Deploy MVP           | ✅ concluída    |

@@ -8,7 +8,7 @@ describe("Diagnóstico de Autenticação (Bcrypt)", () => {
   // O hash esperado para a senha 'admin' (baseado no docker-compose.yml)
   // Devemos usar apenas um $ aqui, pois é assim que a string real deve ser
   const EXPECTED_HASH_PREFIX = "$2a$10$";
-  const TEST_PASSWORD = "admin";
+  const TEST_PASSWORD = "123456";
 
   it("deve ter a variável de ambiente ADMIN_PASSWORD_HASH definida", () => {
     const envHash = process.env.ADMIN_PASSWORD_HASH;

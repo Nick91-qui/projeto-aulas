@@ -16,6 +16,10 @@ coverage/
 .env.development.local
 .env.test.local
 .env.production.local
+# Variáveis de teste
+.env.test.local
+.env.test
+.env.example
 
 # Logs
 npm-debug.log*
